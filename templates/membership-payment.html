@@ -1,0 +1,144 @@
+{% extends 'base.html' %} {% load static %}
+{% block title %} Payment {% endblock title %}
+
+
+
+{% block body %}
+<form method="POST" class="needs-validation" novalidate>
+    {% csrf_token %}
+    <div class="container " style="margin-top: 10rem!important;">
+        <h5 class="text-muted mb-4 ms-5"><strong>Review & Checkout </strong></h5>
+        <div class="border p-5">
+            <h2 class="text-muted" style="font-weight: 500"><strong>Make Payment</strong></h2>
+
+            <div class="row mt-5">
+                <div class="col-lg-3">
+                    <div class="mb-3">
+                        <label for="" class="form-label" class="text-muted "
+                            style="font-size: 20px; font-weight: normal">First Name*</label>
+                        <input type="text" name="first_name" id="first_name" class="form-control" required>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="mb-3">
+                        <label for="" class="form-label" class="text-muted "
+                            style="font-size: 20px; font-weight: normal">Last Name*</label>
+                        <input type="text" name="last_name" id="last_name" class="form-control" required>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="mb-3">
+                        <label for="" class="form-label" class="text-muted "
+                            style="font-size: 20px; font-weight: normal">Billing Address*</label>
+                        <input type="text" name="city" id="city" class="form-control" required>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="mb-3">
+                        <label for="" class="form-label" class="text-muted "
+                            style="font-size: 20px; font-weight: normal">City*</label>
+                        <input type="text" name="city" id="city" class="form-control" required>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="mb-3">
+                        <label for="" class="form-label" class="text-muted "
+                            style="font-size: 20px; font-weight: normal">Country*</label>
+                        <input type="text" name="country" id="country" class="form-control" required>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="mb-3">
+                        <label for="" class="form-label" class="text-muted "
+                            style="font-size: 20px; font-weight: normal">Postal Code*</label>
+                        <input type="text" name="postal_code" id="postal_code" class="form-control" required>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="mb-3">
+                        <label for="" class="form-label" class="text-muted "
+                            style="font-size: 20px; font-weight: normal">Have a Referral Code?</label>
+                        <input type="text" name="referral_code" id="referral_code" class="form-control"
+                            placeholder="Enter Referral Code">
+                        <small class="text-danger" id="invalid-code" style="display: none">Referral code is not
+                            valid</small>
+                        <small class="text-success" id="valid-code" style="display: none">Referral code is
+                            valid</small>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 mt-5">
+                    <div class="mb-3">
+                        <div class="mb-1 ms-2">
+                            <input class="" type="checkbox" value="" id=""
+                                style="accent-color: #ED5565; margin-right: -10px">
+                            <label class="form-check-label ms-3" for="">
+                                Auto Renew After 30 days?
+                            </label>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-lg" id="grand_total" name="total_amount"
+                            style="height: 60px; color: #ED5565; font-weight: 700; font-size: 36px"
+                            value="€{{membership.total_amount}}" readonly>
+                        <div class="d-grid mt-3">
+                            <button class="btn btn-primary btn-lg btn-block">PAY</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-9">
+                    <div class="mb-1">
+                        <input class="" type="checkbox" value="" id="" style="accent-color: #ED5565;">
+                        <label class="form-check-label ms-3 text-muted" for="" style="font-weight: normal">
+                            Subscribe to emails and alerts
+                        </label>
+                    </div>
+                    <div class="mb-1">
+                        <input class="" type="checkbox" value="" id="" style="accent-color: #ED5565;" required>
+                        <label class="form-check-label ms-3 text-muted" style="font-weight: normal" for="">
+                            I confirm that i have read and agreed to <a href="" class="text-primary">Membership Services
+                                Agreement</a>
+                        </label>
+                        <div class="invalid-feedback">
+                            Please check.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+</form>
+
+<script>
+    $('#referral_code').on('change', function () {
+        var code = $(this).val();
+        var url = "{% url 'app:referral-code-verification' %}";
+        data = {
+            code: code,
+            total: "{{membership.total_amount}}",
+        }
+
+        $.ajax({
+            url: url,
+            data: data,
+
+            success: function (data) {
+                if (data.discount_percentage > 0) {
+                    $('#grand_total').val('€' + data.discounted_amount)
+                    $('#valid-code').show()
+                    $('#invalid-code').hide()
+                    $('#referral_code').prop('readonly', true);
+                } else {
+                    $('#valid-code').hide()
+                    $('#invalid-code').show()
+                }
+            }
+        })
+
+    })
+</script>
+
+{% endblock body %}

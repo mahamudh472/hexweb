@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-7uy7sh@!z5d)bo9-ivr@44zlp4fif)^x^5*#@kf7tks*p^z4qc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -37,6 +37,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'jazzmin',
+    # Utilities
+    'crispy_forms',
+    'ckeditor',
+    'ckeditor_uploader',
+    'django_countries',
+    'rest_framework',
+    
+    #APPs
+    'app.apps.AppConfig',
+
 ]
 
 MIDDLEWARE = [
@@ -47,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = 'hexweb.urls'
@@ -69,9 +81,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'hexweb.wsgi.application'
 
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_COOKIE_AGE = 300 # set just 10 seconds to test
+SESSION_SAVE_EVERY_REQUEST = True
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+
 
 DATABASES = {
     'default': {
@@ -119,7 +135,41 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
 
+# Media Manaement 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+# Crispy forms bootstrap pack 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# CKEditor Config 
+CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'height': 300,
+        'width': '99.5%',
+    },
+}
+
+
+JAZZMIN_SETTINGS = {
+    "site_icon": 'img/favicon.png',
+    "login_logo_dark": 'img/favicon.png',
+    "site_header": "Inherent Risks",
+    "site_title": "Inherent Risks",
+    "site_brand": "Inherent Risks",
+    "copyright": "Inherent Risks",
+    "welcome_sign": "Welcome to the Inherent Risks super admin panel",
+}
+
+
