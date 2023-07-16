@@ -9,5 +9,5 @@ def partnership(request):
 def risk_map(request):
     return render(request, 'risk-map.html')
 def travel_hub(request):
-    return render(request, 'travel_hub.html')
+    return render(request, 'travel-hub.html')
 
