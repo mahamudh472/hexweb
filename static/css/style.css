@@ -28,7 +28,8 @@
     font-weight: bold;
     font-size: 15px;
 }
-.form-element{
+
+.form-element {
     display: flex;
     flex-direction: column;
     max-width: 80%;
@@ -45,31 +46,36 @@ input {
     border: none;
     outline: none;
     padding: 8px;
-    color: #5e5e5e  ;
+    color: #5e5e5e;
 }
 
-.form-sub-container{
+.form-sub-container {
     display: grid;
     grid-template-columns: auto auto auto auto;
     grid-row-gap: 50px;
     width: 100%;
 }
-.payment-title{
+
+.payment-title {
     font-size: 25px;
     color: #5e5e5e;
     font-weight: bolder;
     margin-bottom: 35px;
 }
-.form-label{
+
+.form-label {
     color: #5e5e5e;
     font-weight: 600;
+    font-size: 14px;
 }
-.payment-bottom{
+
+.payment-bottom {
     display: flex;
     justify-content: space-between;
 }
-.check-container{
-    
+
+.check-container {
+
     display: block;
     position: relative;
     cursor: pointer;
@@ -80,7 +86,8 @@ input {
     user-select: none;
     color: rgb(146, 146, 146);
 }
-input[type=checkbox]{
+
+input[type=checkbox] {
     border-radius: 50%;
     vertical-align: middle;
     border: 3px solid rgb(0 183 178);
@@ -92,25 +99,31 @@ input[type=checkbox]{
     box-sizing: border-box;
     margin: 3px;
 }
-input[type=checkbox]:checked{
+
+input[type=checkbox]:checked {
     background-color: rgb(0 183 178);
 }
-.payment-bottom-left{
+
+.payment-bottom-left {
     display: flex;
     flex-direction: column;
     gap: 0px;
     margin-top: 80px;
 }
-.payment-bottom-right{
+
+.payment-bottom-right {
     display: flex;
     flex-direction: column;
-    
+
 }
-#amount, #pay{
+
+#amount,
+#pay {
     max-width: 200px;
     margin-right: 30px;
 }
-#amount{
+
+#amount {
     background-color: #fff;
     border: 1px solid silver;
     padding: 10px 5px;
@@ -120,67 +133,114 @@ input[type=checkbox]:checked{
     margin-bottom: 5px;
     margin-top: 10px;
 }
-#pay{
+
+#pay {
     background-color: rgb(0 183 178);
     padding: 15px;
     color: #fff;
     font-weight: bold;
     cursor: pointer;
 }
-.info-bottom-left{
+
+.info-bottom-left {
     width: 50%;
     display: grid;
     grid-template-columns: auto auto;
     margin-top: 30px;
     gap: 30px;
 }
-.info-bottom{
+
+.info-bottom {
     display: flex;
     justify-content: space-between;
     position: relative;
-    
+
 }
-.next_btn{
+
+.next_btn {
     position: absolute;
     top: 120px;
     right: 10px;
     width: 200px;
 }
-#sel{
+
+#sel {
     width: 60px;
     padding: 8px;
     background-color: #EBEBEB;
     outline: none;
     color: #5e5e5e;
 }
-.level-label{
+
+.level-label {
     background-color: #EBEBEB;
     font-weight: bolder;
     padding: 8px;
 }
-.selected{
+
+.selected {
     background-color: rgb(0 183 178);
 }
-.btn-group{
+
+.btn-group {
     display: flex;
     gap: 5px;
 }
-.yes, .no{
+
+.yes,
+.no {
     padding: 5px;
     text-align: center;
-    
+
 }
-.yes{
+
+.yes {
     background-color: rgb(0 183 178);
     width: 80px !important;
     color: #fff;
     cursor: pointer;
 }
-.no{
+
+.no {
     background-color: #EBEBEB;
     width: 80px;
-    
+
 }
-.fa-circle-question{
+
+.fa-circle-question {
     color: rgb(0 183 178);
+}
+
+@media screen and (max-width: 800px) {
+    .form-sub-container {
+        display: flex;
+        flex-direction: column; 
+    }
+
+    .info-bottom-left {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .info-bottom-right input {
+        position: relative;
+        top: auto;
+        right: auto;
+        margin-top: 20px;
+    }
+
+    .info-bottom {
+        flex-direction: column;
+    }
+    .payment-bottom{
+        flex-direction: column;
+    }
+
+}
+
+@media screen and (max-width: 1050px) {
+    .form-sub-container{
+        grid-template-columns: auto auto auto;
+    }
 }

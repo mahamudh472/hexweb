@@ -27,7 +27,8 @@ urlpatterns = [
     path('risk_map', views.risk_map, name="risk_map"),
     path('travel_hub', views.travel_hub, name="travel_hub"),
     path('api/', include('rest_framework.urls')),
-    path('quote', include(('app.urls', 'app'), namespace='app')),
+    path('quote/', include(('app.urls', 'app'), namespace='app')),
+    path('contact', views.contact, name="contact")
 
 ]
 urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

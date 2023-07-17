@@ -11,3 +11,5 @@ def risk_map(request):
 def travel_hub(request):
     return render(request, 'travel-hub.html')
 
+def contact(request):
+    return render(request, 'contact_us.html')
